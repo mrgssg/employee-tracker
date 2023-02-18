@@ -1,4 +1,29 @@
 {
+   "name": "employee-tracker",
+  "description": "able to view and manage the departments, roles, and employees in my company",
+  "version": "1.0.0",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrgssg/employee-tracker.git"
+  },
+  "keywords": [
+    "employee",
+    "tracker"
+  ],
+  "author": "Mark Green",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrgssg/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/mrgssg/employee-tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^9.1.4",
