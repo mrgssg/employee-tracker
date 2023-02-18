@@ -1,5 +1,5 @@
 const inquirer = require("inquirer")
-const cTable = require('console.table');
+const table = require('console.table');
 const EmpDatabase = require('./lib/empDatabase');
 
 const options = [
