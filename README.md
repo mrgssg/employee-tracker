@@ -1,14 +1,29 @@
 # Employee Tracker
 
+<br>
+
+## Table of Contents
+
+  * [Description](#description)
+  
+  * [Technology](#technology)
+
+  * [Links](#links)
+
+<br>
+
 ## Description
 ### View and manage the departments, roles, and employees in order to plan and organize business matters.
 
-## Functionality
-###
+<br>
 
-## Technology Used
-### Node.js, Inquirer, MySQL
+## Technology
+### Node.js, Inquirer, and MySQL are used to install and run the application. 
+
+<br>
 
 ## Links
-### Walkthrough Video:
-### Github
+### Links to the walkthrough video and Github repo.
+
+### Walkthrough Video
+### <a href="https://github.com/mrgssg/employee-tracker"> Github</a>
