@@ -1,5 +1,5 @@
 const inquirer = require("inquirer")
-const ctable = require('console.table');
+const cTable = require('console.table');
 const EmpDatabase = require('./lib/empDatabase');
 
 const options = [
@@ -67,6 +67,8 @@ async function startRequest() {
 async function viewDepartments() {
     const sql = "SELECT * FROM department";
     res = await db.query(sql);
+    console.log("\nDepartments");
+    console.table(res);
     startRequest();
 }
 
@@ -189,7 +191,7 @@ async function addEmployee() {
         }
     ]);
     
-    const sql = "INSERT INTO employee SET ?";
+    const sql = "INSERT INTO employee SET?";
 
     let manager_id = null;
     if (answers.manager_choice != "None") {
