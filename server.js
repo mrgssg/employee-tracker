@@ -129,13 +129,14 @@ async function addRole() {
             name: "salary",
             type: "input",
             message: "Enter salary:",
-            validate: (answer) => {
-                salaryRegex = /^[$]?\d[\d,]*$/
-                if(!salaryRegex.test(answer)) {
-                    return "Not a valid salary!";
+            validate: salaryInput => {
+                if(salaryInput.match("[0-9]+$")) {
+                    return true;
+                } else {
+                    console.log("Please enter salary as anumber");
+                    return false;
                 }
-                return true;
-            }   
+            }
         },
         {
             name: "choice",
