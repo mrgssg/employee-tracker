@@ -129,7 +129,7 @@ async function addRole() {
             name: "salary",
             type: "input",
             message: "Enter salary:",
-            validate(answer) {
+            validate: (answer) => {
                 salaryRegex = /^[$]?\d[\d,]*$/
                 if(!salaryRegex.test(answer)) {
                     return "Not a valid salary!";
@@ -145,7 +145,7 @@ async function addRole() {
         }
     ]);
     const sql = "INSERT INTO role SET ?";
-    await db.query(sql,
+    await db.promise().query(sql,
         {
             title: answers.name,
             salary: parseFloat(answers.salary),
@@ -162,7 +162,7 @@ async function addEmployee() {
     const roles = await db.promise().query(`SELECT id, title FROM role`);
     const role_list = roles.map(function (el) { return el.title; });
 
-    const employees = await db.query(`SELECT id, concat(first_name, " ", last_name) as name FROM employee`)
+    const employees = await db.promise().query(`SELECT id, concat(first_name, " ", last_name) as name FROM employee`)
     var employee_list = employees.map(function (el) { return el.name; });
     employee_list.push("None");
      
@@ -200,7 +200,7 @@ async function addEmployee() {
         manager_id = getRecordId(employees, "name", answers.manager_choice);
     }      
                 
-    await db.query(sql,
+    await db.promise().query(sql,
         {
             first_name: answers.firstname,
             last_name: answers.lastname,
@@ -215,10 +215,10 @@ async function addEmployee() {
 // update an employee's role in the employee_db
 async function updateEmployeeRole() {
 
-    const roles = await db.query(`SELECT id, title FROM role`);
+    const roles = await db.promise().query(`SELECT id, title FROM role`);
     const role_list = roles.map(function (el) { return el.title; });
 
-    const employees = await db.query(`SELECT id, concat(first_name, " ", last_name) as name FROM employee`);
+    const employees = await db.promise().query(`SELECT id, concat(first_name, " ", last_name) as name FROM employee`);
     const employee_list = employees.map(function (el) { return el.name; });
      
     const answers = await inquirer.prompt([
@@ -238,7 +238,7 @@ async function updateEmployeeRole() {
 
     const sql = "UPDATE employee SET role_id=? WHERE id=?";
           
-    await db.query(sql,
+    await db.promise().query(sql,
         [
             getRecordId(roles, "title", answers.role_choice),
             getRecordId(employees, "name", answers.employee_choice)
