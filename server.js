@@ -1,6 +1,8 @@
 const inquirer = require("inquirer")
 const cTable = require('console.table');
-const EmpDatabase = require('./lib/empDatabase');
+const mysql = require('mysql2');
+const db = require('./lib/empDatabase');
+
 
 const options = [
     "View all Deparments", 
@@ -13,7 +15,7 @@ const options = [
     "Quit",
 ];
 
-const db = new EmpDatabase();
+
 
 // initial function
 startRequest();
@@ -64,29 +66,29 @@ async function startRequest() {
 }
 
 // employee_db department
-async function viewDepartments() {
+ async function viewDepartments() {
     const sql = "SELECT * FROM department";
-    res = await db.query(sql);
+    res = await db.promise().query(sql);
     console.log("\nDepartments");
-    console.table(res);
+    console.table(res[0]);
     startRequest();
 }
 
 // employee_db role
 async function viewRoles() {
     const sql = "SELECT role.id, role.title, role.salary, department.name AS department_name FROM role INNER JOIN department ON role.department_id=department.id";
-    res = await db.query(sql);
+    res = await db.promise().query(sql);
     console.log("\nRoles");
-    console.table(res);
+    console.table(res[0]);
     startRequest();
 }
 
 // employee table
 async function viewEmployees() {
     const sql = "select emp.id, emp.first_name, emp.last_name, role.title as job_title, department.name as department_name, role.salary as salary, emp.manager_id from employee as emp inner join role on emp.role_id=role.id inner join department on role.department_id=department.id";
-    res = await db.query(sql);
+    res = await db.promise().query(sql);
     console.log("\nEmployees");
-    console.table(res);
+    console.table(res[0]);
     startRequest();
 }
 
@@ -101,7 +103,7 @@ async function addDepartment() {
         }
     ]);
     const sql = "INSERT INTO department SET ?";
-    await db.query(sql,
+    await db.promise().query(sql,
         {
             name: answers.name
         }
@@ -113,7 +115,7 @@ async function addDepartment() {
 // adding a new role to employee db
 async function addRole() {
 
-    const departments = await db.query(`SELECT id, name FROM department`);
+    const departments = await db.promise().query(`SELECT id, name FROM department`);
     const dept_list = departments.map(function (el) { return el.name; });
 
     const answers = await inquirer.prompt([
@@ -157,7 +159,7 @@ async function addRole() {
 // add a new employee
 async function addEmployee() {
 
-    const roles = await db.query(`SELECT id, title FROM role`);
+    const roles = await db.promise().query(`SELECT id, title FROM role`);
     const role_list = roles.map(function (el) { return el.title; });
 
     const employees = await db.query(`SELECT id, concat(first_name, " ", last_name) as name FROM employee`)
