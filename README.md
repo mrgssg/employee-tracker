@@ -25,5 +25,5 @@
 ## Links
 ### Links to the walkthrough video and Github repo.
 
-### Walkthrough Video
+### <a href="https://drive.google.com/file/d/1lO0Zhfn7GD9Dtz8ks9tDrNOinPh4zuEK/view"> Walkthrough Video
 ### <a href="https://github.com/mrgssg/employee-tracker"> Github</a>
